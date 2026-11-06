@@ -32,7 +32,7 @@ export function DailyQuestion() {
     load();
   }
   return (
-    <section className="card p-4">
+    <section className="tone-card p-5" style={{ background: "var(--butter)" }}>
       <p className="label">Pergunta do dia</p>
       <p className="mt-1 text-lg font-bold">{q.text}</p>
       {!mine ? (

@@ -66,7 +66,7 @@ export default function Checkin() {
 
   if (step === 1) {
     return (
-      <main className="safe-top safe-bottom flex min-h-dvh flex-col px-5">
+      <main className="safe-top safe-bottom flex min-h-dvh flex-col px-6">
         <div className="flex items-center justify-between">
           <button className="h-11 px-1 text-[var(--muted)]" onClick={() => router.replace("/nos")}>fechar</button>
         </div>
@@ -77,7 +77,7 @@ export default function Checkin() {
               key={m}
               disabled={busy}
               onClick={() => pickMood(m)}
-              className="tap-pop card flex items-center gap-4 px-5 py-3 text-left text-xl font-bold"
+              className="tap-pop card flex items-center gap-4 px-6 py-3 text-left text-xl font-bold"
               aria-label={`${m} - ${MOOD_LABEL[m]}`}
               data-testid={`face-${m}`}
             >
@@ -96,7 +96,7 @@ export default function Checkin() {
   }
 
   return (
-    <main className="safe-top safe-bottom flex min-h-dvh flex-col gap-5 px-5 pb-6">
+    <main className="safe-top safe-bottom flex min-h-dvh flex-col gap-5 px-6 pb-6">
       <div className="flex items-center gap-3 pt-2">
         {mood && <Face mood={mood} size={44} />}
         <p className="font-bold">Salvo. Quer contar mais?</p>

@@ -37,7 +37,7 @@ export default function Roles() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Match de rolês" back="/nos" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         {!outings.length && <p className="card p-5 text-[var(--muted)]">Na quinta à noite chegam de 6 a 10 ideias pro fim de semana. Cada um decide sozinho; só o que os dois aprovarem vira plano.</p>}
         {current && (
           <div className="float-in card p-6 text-center" key={current.id}>

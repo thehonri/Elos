@@ -7,7 +7,7 @@ export default function Atalho() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Check-in pelo Atalho" back="/ajustes" />
-      <div className="flex flex-col gap-4 px-5 leading-relaxed">
+      <div className="flex flex-col gap-5 px-6 leading-relaxed">
         <Section title="1. Gere seu token">
           <p>Em <Link href="/ajustes" className="underline">Ajustes → Atalho do iPhone</Link>, toque em <b>Gerar token pessoal</b> e copie. Ele é só seu e pode ser revogado a qualquer momento.</p>
         </Section>

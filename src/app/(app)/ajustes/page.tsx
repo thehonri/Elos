@@ -104,7 +104,7 @@ export default function Ajustes() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Ajustes" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         {!partner && <Section title="Convite"><InviteBox /></Section>}
 
         <Section title="Compartilhamento">

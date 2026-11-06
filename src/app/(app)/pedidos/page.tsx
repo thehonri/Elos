@@ -58,11 +58,11 @@ export default function Pedidos() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Pedidos e carinhos" />
-      <div className="flex flex-col gap-4 px-5">
-        <Section title={`Pedir pra ${who}`}>
+      <div className="flex flex-col gap-5 px-6">
+        <Section tone="sky" title={`Pedir pra ${who}`}>
           <div className="grid grid-cols-2 gap-2">
             {quickRequests(me.role).map((q) => (
-              <button key={q.id} className="tap-pop min-h-[64px] rounded-2xl bg-[var(--chip)] px-3 text-left font-bold" onClick={() => ask(q.id)} data-testid={`ask-${q.id}`}>{q.label}</button>
+              <button key={q.id} className="inner tap-pop min-h-[68px] rounded-[20px] bg-[var(--chip)] px-4 text-left font-bold" onClick={() => ask(q.id)} data-testid={`ask-${q.id}`}>{q.label}</button>
             ))}
           </div>
           {!showCustom ? (
@@ -75,7 +75,7 @@ export default function Pedidos() {
           )}
         </Section>
 
-        <Section title="Carinho de 1 toque">
+        <Section tone="peach" title="Carinho de 1 toque">
           <div className="flex flex-wrap gap-2">
             {TOUCHES.map((t) => <button key={t.id} className="chip tap-pop" onClick={() => touch(t.id)}>{t.label}</button>)}
           </div>
@@ -87,7 +87,7 @@ export default function Pedidos() {
             {open.map((r) => {
               const mine = r.to_user === me.user_id;
               return (
-                <li key={r.id} className="flex items-center justify-between gap-2 rounded-2xl bg-[var(--chip)] p-3" data-testid="request-item">
+                <li key={r.id} className="flex items-center justify-between gap-2 inner rounded-2xl bg-[var(--chip)] p-3" data-testid="request-item">
                   <span>
                     <b>{requestLabel(r.type, r.from_user === me.user_id ? me.role : partner?.role ?? "her", r.custom_text)}</b>
                     <br /><span className="text-xs text-[var(--muted)]">{mine ? `de ${who}` : `você pediu pra ${who}`}</span>

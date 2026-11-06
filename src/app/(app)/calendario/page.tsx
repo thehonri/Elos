@@ -52,7 +52,7 @@ export default function Calendario() {
     return (
       <main>
         <Header title="Calendário" />
-        <p className="card mx-5 p-5 text-[var(--muted)]">{partner?.is_paused ? "Ela pausou o compartilhamento por agora." : "O ciclo dela não está compartilhado. Tudo bem: o check-in do dia continua sendo o melhor guia."}</p>
+        <p className="card mx-6 p-5 text-[var(--muted)]">{partner?.is_paused ? "Ela pausou o compartilhamento por agora." : "O ciclo dela não está compartilhado. Tudo bem: o check-in do dia continua sendo o melhor guia."}</p>
       </main>
     );
   }
@@ -96,7 +96,7 @@ export default function Calendario() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Calendário" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         {pred && (
           <Section title={herLabel}>
             <p className="text-lg"><b>Dia {pred.day}</b> · {PHASES[pred.phase].label}</p>
@@ -111,7 +111,7 @@ export default function Calendario() {
               </p>
             )}
             {pred.late && <p className="mt-2 text-sm text-[var(--muted)]">Passou da faixa prevista. Ciclos variam; se te preocupar, vale falar com a ginecologista.</p>}
-            {pattern && <p className="mt-2 rounded-2xl bg-[var(--chip)] p-3 text-sm">Nos últimos ciclos, os dias {pattern.from}-{pattern.to} foram os mais difíceis.</p>}
+            {pattern && <p className="mt-2 inner rounded-2xl bg-[var(--chip)] p-3 text-sm">Nos últimos ciclos, os dias {pattern.from}-{pattern.to} foram os mais difíceis.</p>}
             {isHer && (
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <button className="btn" onClick={() => started(today)} data-testid="period-start">Desceu</button>
@@ -131,7 +131,7 @@ export default function Calendario() {
           <Section title="Radar de 7 dias">
             <ul className="flex flex-col gap-2">
               {radar(pred, contraception, today).map((r) => (
-                <li key={r.date} className="flex items-start justify-between gap-2 rounded-2xl bg-[var(--chip)] p-3 text-sm">
+                <li key={r.date} className="flex items-start justify-between gap-2 inner rounded-2xl bg-[var(--chip)] p-3 text-sm">
                   <span className="font-bold">{fmtDay(r.date, { weekday: "short", day: "numeric" })}</span>
                   <span className="flex-1 text-right">{PHASES[r.phase].label}{r.note ? ` · ${r.note}` : ""}<br /><span className="text-[var(--muted)]">{PHASES[r.phase].tips[0]}</span></span>
                 </li>
@@ -157,7 +157,7 @@ export default function Calendario() {
           </div>
           <p className="mt-2 text-xs text-[var(--muted)]">rosa: menstruação · listrado: previsão</p>
           {isHer && sel && (
-            <div className="mt-3 flex flex-col gap-2 rounded-2xl bg-[var(--chip)] p-3">
+            <div className="mt-3 flex flex-col gap-2 inner rounded-2xl bg-[var(--chip)] p-3">
               <p className="font-bold">{fmtDay(sel, { weekday: "long", day: "numeric", month: "long" })}</p>
               <div className="grid grid-cols-2 gap-2">
                 <button className="btn min-h-[44px]" onClick={() => started(sel)}>Desceu neste dia</button>

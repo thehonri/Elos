@@ -38,7 +38,7 @@ export default function Onboarding() {
   }
 
   return (
-    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-10">
+    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-6 pb-10">
       <div className="mb-4 flex gap-1.5" aria-label={`Passo ${i + 1} de ${steps.length}`}>
         {steps.map((s, k) => (
           <span key={s} className="h-1.5 flex-1 rounded-full" style={{ background: k <= i ? "var(--accent)" : "var(--line)" }} />
@@ -67,7 +67,7 @@ function InstallStep({ onNext }: { onNext: () => void }) {
         <li><b>2.</b> Role e toque em <b>Adicionar à Tela de Início</b>.</li>
         <li><b>3.</b> Abra o Elo pelo ícone novo e entre com seu e-mail e senha.</li>
       </ol>
-      {standalone && <p className="mt-4 rounded-2xl bg-[var(--chip)] p-3 text-center font-semibold">Pronto, você já está no app instalado.</p>}
+      {standalone && <p className="mt-4 inner rounded-2xl bg-[var(--chip)] p-3 text-center font-semibold">Pronto, você já está no app instalado.</p>}
       {!standalone && !isIOS() && <p className="mt-4 text-sm text-[var(--muted)]">Fora do iPhone, use “Instalar app” no menu do navegador.</p>}
       <div className="mt-auto pt-6">
         <button className="btn w-full" onClick={onNext}>{standalone ? "Continuar" : "Já instalei / fazer depois"}</button>
@@ -200,7 +200,7 @@ function PushStep({ userId, onNext }: { userId: string; onNext: () => void }) {
       <h1 className="text-3xl font-extrabold">Avisos com carinho</h1>
       <p className="text-[var(--muted)]">Lembrete de check-in (8h30 nos dias úteis, 11h no fim de semana), pedidos e carinhos do seu amor. Dá pra mudar os horários depois.</p>
       <button className="btn w-full" onClick={on}>Ativar notificações</button>
-      {res && <p role="status" className="rounded-2xl bg-[var(--chip)] p-3 text-center">{res}</p>}
+      {res && <p role="status" className="inner rounded-2xl bg-[var(--chip)] p-3 text-center">{res}</p>}
       <div className="mt-auto"><button className="btn btn-ghost w-full" onClick={onNext}>{res ? "Continuar" : "Agora não"}</button></div>
     </div>
   );

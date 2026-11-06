@@ -17,7 +17,7 @@ export function InviteBox() {
   }
   return (
     <div className="card flex flex-col gap-3 p-4">
-      <p className="break-all rounded-2xl bg-[var(--chip)] p-3 text-sm" data-testid="invite-url">{url}</p>
+      <p className="break-all inner rounded-2xl bg-[var(--chip)] p-3 text-sm" data-testid="invite-url">{url}</p>
       <button className="btn" onClick={share}>{copied ? "Link copiado" : "Mandar o convite"}</button>
     </div>
   );

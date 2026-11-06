@@ -85,18 +85,18 @@ export default function Contexto() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Contexto" />
-      <div className="mx-5 grid grid-cols-3 gap-1 rounded-full bg-[var(--chip)] p-1" role="tablist">
+      <div className="mx-6 grid grid-cols-3 gap-1 rounded-full bg-[var(--chip)] p-1" role="tablist">
         {([["itens", "Gostos"], ["casa", "Casa e gatos"], ["limites", "Limites"]] as const).map(([id, l]) => (
           <button key={id} role="tab" aria-selected={tab === id} className={`min-h-[44px] rounded-full text-sm font-bold ${tab === id ? "bg-[var(--card)] shadow" : ""}`} onClick={() => setTab(id)}>{l}</button>
         ))}
       </div>
 
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         {tab === "itens" && (
           <>
             <Section title={`Banco de contexto (${items.length})`} action={<button className="chip min-h-[40px]" onClick={() => setForm({ category: "comida", title: "", tags: [], cost_level: 1, preferred_by: me.role })}><IconPlus size={18} /> novo</button>}>
               {form && (
-                <form onSubmit={saveItem} className="mb-4 flex flex-col gap-3 rounded-2xl bg-[var(--chip)] p-3">
+                <form onSubmit={saveItem} className="mb-4 flex flex-col gap-3 inner rounded-2xl bg-[var(--chip)] p-3">
                   <div className="flex flex-wrap gap-2">
                     {CONTEXT_CATEGORIES.map((c) => <button type="button" key={c.id} className="chip bg-[var(--card)]" aria-pressed={form.category === c.id} onClick={() => setForm({ ...form, category: c.id })}>{c.label}</button>)}
                   </div>
@@ -141,7 +141,7 @@ export default function Contexto() {
             <Section title="Tarefas">
               <ul className="flex flex-col gap-2">
                 {tasks.map((t) => (
-                  <li key={t.id} className="rounded-2xl bg-[var(--chip)] p-3">
+                  <li key={t.id} className="inner rounded-2xl bg-[var(--chip)] p-3">
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-bold">{t.task}</span>
                       <button className="btn min-h-[44px] px-4" aria-pressed={!!doneToday(t)} onClick={() => taskDone(t)}><IconCheck size={18} /> {doneToday(t) ? "feito hoje" : "feito"}</button>
@@ -163,7 +163,7 @@ export default function Contexto() {
             <Section title="Saúde dos gatos">
               {pets.length === 0 && <p className="text-sm text-[var(--muted)]">Nenhum gato cadastrado ainda.</p>}
               {pets.map((p) => (
-                <div key={p.id} className="mb-3 rounded-2xl bg-[var(--chip)] p-3">
+                <div key={p.id} className="mb-3 inner rounded-2xl bg-[var(--chip)] p-3">
                   <p className="font-bold">{p.name}</p>
                   {([["vaccine_due", "Vacina"], ["dewormer_due", "Vermífugo"], ["flea_due", "Antipulgas"]] as const).map(([k, l]) => (
                     <label key={k} className="mt-2 flex items-center justify-between gap-2 text-sm">

@@ -61,7 +61,7 @@ export default function Cofre() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Cofre do casal" back="/nos" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         {yearAgo.length > 0 && (
           <Section title="Neste dia, há um ano">
             <div className="flex flex-col gap-3">{yearAgo.map((v) => <VaultCard key={v.id} item={v} />)}</div>

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { sb, api } from "@/lib/supabase";
 import { useApp } from "@/lib/app-context";
 import { Cats } from "@/components/Cats";
+import { Logo } from "@/components/ui";
 
 export default function Entrar() {
   const router = useRouter();
@@ -49,14 +50,15 @@ export default function Entrar() {
   }
 
   return (
-    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-10">
+    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-6 pb-10">
       <div className="mt-6 text-center">
-        <h1 className="text-4xl font-extrabold text-[var(--accent)]">Elo</h1>
+        <div className="flex justify-center"><Logo size={140} /></div>
+        <h1 className="mt-3 text-[34px] font-extrabold tracking-tight">Elo</h1>
         <p className="mt-1 text-[var(--muted)]">o lugar de vocês dois</p>
       </div>
       <div className="my-6"><Cats mood="sleeping" /></div>
 
-      <form onSubmit={submit} className="card flex flex-col gap-3 p-5">
+      <form onSubmit={submit} className="card flex flex-col gap-3 p-6">
         {mode === "create" && (
           <>
             <label className="label" htmlFor="name">Seu nome</label>

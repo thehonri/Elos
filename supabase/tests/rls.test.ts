@@ -156,6 +156,26 @@ async function main() {
     vault = await herA.c.from("vault_items").select("*").eq("kind", "message");
     check("depois de entregue ela pode reler", vault.data?.length === 1);
 
+    console.log("Etapa B");
+    const qd = "2030-01-01";
+    await herA.c.from("question_answers").insert({ question_id: 1, couple_id: ca.data.id, user_id: herA.id, date: qd, option: "praia" });
+    let qa = await himA.c.from("question_answers").select("*").eq("date", qd);
+    check("ele não vê a resposta dela antes de responder", qa.data?.length === 0, qa.data);
+    await himA.c.from("question_answers").insert({ question_id: 1, couple_id: ca.data.id, user_id: himA.id, date: qd, option: "montanha" });
+    qa = await himA.c.from("question_answers").select("*").eq("date", qd);
+    check("depois de responder, ele vê as duas", qa.data?.length === 2, qa.data);
+    const out = await himA.c.from("outings").insert({ couple_id: ca.data.id, week: qd, title: "Piquenique" }).select().single();
+    await himA.c.from("outing_swipes").insert({ outing_id: out.data!.id, user_id: himA.id, yes: true });
+    let m = await herA.c.from("outing_matches").select("*").eq("week", qd);
+    check("sem match com um só sim", m.data?.length === 0);
+    const swHack = await herA.c.from("outing_swipes").select("*").eq("user_id", himA.id);
+    check("ela não vê o swipe dele", swHack.data?.length === 0);
+    await herA.c.from("outing_swipes").insert({ outing_id: out.data!.id, user_id: herA.id, yes: true });
+    m = await herA.c.from("outing_matches").select("*").eq("week", qd);
+    check("match quando os dois dizem sim", m.data?.length === 1);
+    const fakeSwipe = await himA.c.from("outing_swipes").insert({ outing_id: out.data!.id, user_id: herA.id, yes: false });
+    check("ninguém vota pelo outro", !!fakeSwipe.error);
+
     console.log("Isolamento entre casais");
     await herB.c.from("share_settings").update({ confirmed_at: new Date().toISOString() }).eq("user_id", herB.id);
     await herB.c.from("daily_logs").insert({ user_id: herB.id, date: today, mood: 4, private_note: "segredo B" });

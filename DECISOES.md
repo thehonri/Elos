@@ -21,3 +21,20 @@ Uma linha por decisão: decisão — motivo.
 - SQL aplicado via Management API (`scripts/sql.sh`) em vez de `supabase db push` — não exige senha do banco nem conexão 5432.
 - `iud_hormonal` NÃO é tratado como "sem ovulação"; só `hormonal_pill` usa cartela ativa/pausa — DIU hormonal frequentemente mantém a ovulação.
 - App majoritariamente client-side (supabase-js com sessão em localStorage) e rotas de API para push, cron, atalho, exclusão de conta — sessão persistente no PWA e menos atrito com cache do Next 16.
+- **Login por e-mail + senha** como caminho principal (não OTP) — o plano grátis do Supabase não permite editar o modelo de e-mail sem SMTP próprio, e o e-mail padrão só manda link (que abre no Safari, fora do PWA). Senha é digitada uma vez, dentro do app, e a sessão persiste.
+- **Cadastro público desligado** no Supabase; contas só nascem em `/api/signup`: quem cria o casal precisa estar em `ELO_CREATOR_EMAILS`, quem entra precisa de convite válido com vaga — evita que qualquer pessoa crie conta (a confirmação automática de e-mail foi recusada por segurança).
+- "Esqueci a senha" usa o e-mail padrão do Supabase (link abre no Safari, cria a senha nova lá e volta pro app) — funciona sem SMTP, só limitado a 2 e-mails/hora.
+- `@serwist/turbopack` (rota `/serwist/sw.js`) em vez de `@serwist/next` — o Next 16 builda com Turbopack; o plugin webpack não roda. `cacheComponents` desligado porque a integração do Serwist exige.
+- Regras `react-hooks/set-state-in-effect` e `preserve-manual-memoization` desligadas no ESLint — padrão de busca assíncrona ao Supabase dentro de efeito; o setState acontece depois do await.
+- Sugestões são calculadas no aparelho de quem vai agir (a partir da view do parceiro) e guardadas em `suggestions` com `inputs_snapshot`; só recalcula quando o estado do outro muda — RLS impede gravar sugestões em nome do outro.
+- Push é disparado pelo cliente via `/api/notify`, e o servidor confere no banco que a pessoa é mesmo a autora antes de enviar — mais simples que webhooks do banco e sem abrir brecha.
+- Cron: URL e segredo guardados no **Vault do Supabase** (`elo_cron_url`, `elo_cron_secret`), nunca no git; janela de 60 min para lembretes caso o cron atrase; `last_sent_on` garante 1 por dia.
+- Rolês (Etapa B) gerados quinta ≥19h a partir do banco de contexto + ideias genéricas (8 por semana); match = view `outing_matches` (2 "sim"). Swipe do outro é invisível (RLS).
+- Pergunta do dia: escolhida por `dia % 60`, igual para os dois; a resposta do outro só aparece via RLS depois que você responde.
+- Rede de segurança: 10+ dias com rosto 1-2 no ciclo atual, ou 7+ no atual e 7+ no anterior ("padrão pesado repetido"); registrada em `safety_net_shown` (1x por ciclo).
+- Atalho do iPhone: token `elo_<48 hex>` gerado no aparelho, só o SHA-256 vai ao banco.
+- Casal demo e testes rodam no mesmo projeto Supabase (só existe um), com e-mails `@elo.test`; testes apagam o que criam.
+- Vercel: projeto `elo`, deploy por CLI (sem integração Git ainda). Proteção de deploy padrão vale só para URLs de preview; produção é pública.
+- **Visual (pedido do Emanuel)**: estilo Apple, fofo e limpo. Cor da marca = cor da logo `#40D1B2`; fundos em verde-água bebê (`#F3FBF8`, `#DDF6EF`); secundárias bebê (pêssego, lavanda, manteiga, céu, rosa) como fundo de cartões. Texto sobre a cor da logo é verde-petróleo `#0E4D42`, porque branco teria contraste ~1,9:1 (ilegível).
+- Fonte `ui-rounded` (SF Pro Rounded no iPhone), com Nunito como reserva em outros aparelhos.
+- Ícones do app gerados a partir da logo enviada (fundo removido em `public/brand/logo.png`, ícones com fundo branco).

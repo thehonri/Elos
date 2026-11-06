@@ -58,12 +58,12 @@ export function Cats({ mood, names }: { mood: CatMood; names?: [string?, string?
   return (
     <figure className="flex flex-col items-center">
       <svg viewBox="0 0 260 130" className="w-full max-w-[280px]" role="img" aria-label={`Gatos ${caption[mood]}`}>
-        {mood === "cuddling" && <ellipse cx="130" cy="112" rx="112" ry="16" fill="var(--blush)" opacity=".6" />}
+        {mood === "cuddling" && <ellipse cx="130" cy="112" rx="112" ry="16" fill="var(--mint)" opacity=".9" />}
         {mood === "sleeping" && (
           <text x="200" y="40" fontSize="16" fill="var(--muted)" className="zzz">z z</text>
         )}
-        <Cat x={mood === "sleeping" ? 40 : 10} color="#d9a37a" pose={mood} />
-        <Cat x={mood === "sleeping" ? 100 : 130} color="#8c8a93" pose={mood} flip />
+        <Cat x={mood === "sleeping" ? 40 : 10} color="#f6c9a8" pose={mood} />
+        <Cat x={mood === "sleeping" ? 100 : 130} color="#c9c4dc" pose={mood} flip />
         {mood === "playing" && <circle cx="130" cy="112" r="8" fill="var(--accent)" className="cat-ball" />}
       </svg>
       <figcaption className="text-sm text-[var(--muted)]">

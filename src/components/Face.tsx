@@ -1,5 +1,5 @@
 // Rostos próprios do Elo (1 = muito difícil … 5 = muito bem).
-const FILL: Record<number, string> = { 1: "#b7a6c9", 2: "#a9c1d9", 3: "#e8d6a8", 4: "#f2bc8f", 5: "#f09a7e" };
+const FILL: Record<number, string> = { 1: "#d6caf6", 2: "#c4e1fb", 3: "#fde9a9", 4: "#a9ecdb", 5: "#ffc7b3" };
 
 export function Face({ mood, size = 64, title }: { mood: number; size?: number; title?: string }) {
   const mouth: Record<number, string> = {
@@ -30,16 +30,16 @@ export function Face({ mood, size = 64, title }: { mood: number; size?: number; 
     <svg width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={title}>
       {title && <title>{title}</title>}
       <circle cx="32" cy="32" r="29" fill={FILL[mood]} />
-      <circle cx="32" cy="32" r="29" fill="none" stroke="var(--ink)" strokeOpacity=".15" strokeWidth="2" />
+      <circle cx="32" cy="32" r="29" fill="none" stroke="var(--ink)" strokeOpacity=".08" strokeWidth="2" />
       {eyes}
       {(mood === 4 || mood === 5) && (
-        <g fill="#e2755f" opacity=".45">
+        <g fill="#ff9fb4" opacity=".55">
           <ellipse cx="15" cy="36" rx="5" ry="3" />
           <ellipse cx="49" cy="36" rx="5" ry="3" />
         </g>
       )}
       {mood === 1 && <path d="M45 33 q2 5 0 7 q-2 -2 0 -7" fill="#7fa7d6" />}
-      <path d={mouth[mood]} stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill={mood === 5 ? "#7b3b35" : "none"} />
+      <path d={mouth[mood]} stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" fill={mood === 5 ? "#7a3a45" : "none"} />
     </svg>
   );
 }

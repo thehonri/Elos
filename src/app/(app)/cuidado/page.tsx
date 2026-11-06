@@ -48,7 +48,7 @@ export default function Cuidado() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Diário de cuidado" back="/nos" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         <Section title={`O que eu fiz por ${partner?.name || "você"} hoje`}>
           <div className="flex flex-wrap gap-2">{options.map((o, k) => <button key={k} className="chip tap-pop" onClick={() => add(o)}>{o.title}</button>)}</div>
         </Section>

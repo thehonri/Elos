@@ -33,13 +33,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="mx-auto min-h-dvh max-w-md">
       <div className={fullscreen ? "" : "pb-28"}>{children}</div>
       {!fullscreen && (
-        <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-[var(--line)] bg-[var(--card)]/95 backdrop-blur" aria-label="Principal">
+        <nav className="safe-bottom fixed inset-x-0 bottom-0 z-40 bg-[var(--card)]/90 shadow-[0_-8px_24px_rgba(16,60,52,.06)] backdrop-blur-xl" aria-label="Principal">
           <ul className="mx-auto flex max-w-md justify-around pt-1.5">
             {NAV.map(({ href, label, Icon }) => {
               const active = path === href || path.startsWith(href + "/");
               return (
                 <li key={href}>
-                  <Link href={href} className={`flex min-w-[64px] flex-col items-center gap-0.5 rounded-2xl px-2 py-1.5 text-[11px] font-bold ${active ? "text-[var(--accent)]" : "text-[var(--muted)]"}`} aria-current={active ? "page" : undefined}>
+                  <Link href={href} className={`flex min-w-[62px] flex-col items-center gap-0.5 rounded-[18px] px-2 py-1.5 text-[11px] font-bold transition-colors ${active ? "bg-[var(--mint)] text-[var(--accent-text)]" : "text-[var(--muted)]"}`} aria-current={active ? "page" : undefined}>
                     <Icon size={24} />
                     {label}
                   </Link>

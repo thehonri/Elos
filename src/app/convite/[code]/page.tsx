@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { sb, api } from "@/lib/supabase";
 import { useApp } from "@/lib/app-context";
 import { Cats } from "@/components/Cats";
+import { Logo } from "@/components/ui";
 
 export default function Convite({ params }: { params: Promise<{ code: string }> }) {
   const { code } = use(params);
@@ -56,8 +57,9 @@ export default function Convite({ params }: { params: Promise<{ code: string }> 
   }
 
   return (
-    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-5 pb-10">
-      <h1 className="mt-6 text-center text-3xl font-extrabold">
+    <main className="safe-top mx-auto flex min-h-dvh max-w-md flex-col px-6 pb-10">
+      <div className="mt-6 flex justify-center"><Logo size={110} /></div>
+      <h1 className="mt-4 text-center text-3xl font-extrabold tracking-tight">
         {info.inviter ? `${info.inviter} te chamou pro Elo` : "Você foi convidado(a) pro Elo"}
       </h1>
       <p className="mt-2 text-center text-[var(--muted)]">Um lugar dos dois, para os dois. Você escolhe o que compartilha.</p>

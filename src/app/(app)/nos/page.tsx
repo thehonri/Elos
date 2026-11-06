@@ -12,7 +12,7 @@ import { sendTouch } from "@/lib/support";
 import { Face, EmptyFace } from "@/components/Face";
 import { Cats, catMoodFor } from "@/components/Cats";
 import { IconPause, IconPlay, IconVault, IconSpark, IconCheck, IconPaw } from "@/components/Icons";
-import { Section, Toast } from "@/components/ui";
+import { Logo, Section, Toast } from "@/components/ui";
 import { useToast } from "@/components/useToast";
 import { DailyQuestion } from "@/components/DailyQuestion";
 
@@ -170,20 +170,21 @@ export default function Nos() {
   const showPhase = herPred && (me.role === "her" || (partner?.role === "her" && partner?.contraception));
 
   return (
-    <main className="flex flex-col gap-4 px-5">
-      <header className="safe-top flex items-center justify-between">
+    <main className="flex flex-col gap-5 px-6">
+      <header className="safe-top flex items-end justify-between pt-2">
         <div>
+          <Logo size={64} />
+          <h1 className="mt-1 text-[34px] font-extrabold leading-tight tracking-tight">Nós</h1>
           <p className="text-sm text-[var(--muted)]">{fmtDay(today, { weekday: "long", day: "numeric", month: "long" })}</p>
-          <h1 className="text-3xl font-extrabold">Nós</h1>
         </div>
         <button onClick={togglePause} className={`btn ${share?.paused_at ? "" : "btn-ghost"} min-h-[44px] px-4 text-sm`} data-testid="pause-toggle" aria-pressed={!!share?.paused_at}>
           {share?.paused_at ? <><IconPlay size={20} /> retomar</> : <><IconPause size={20} /> pausar</>}
         </button>
       </header>
-      {share?.paused_at && <p className="rounded-2xl bg-[var(--chip)] p-3 text-center text-sm">Seu compartilhamento está pausado. {partner?.name || "Seu amor"} não vê seu humor nem seu ciclo.</p>}
+      {share?.paused_at && <p className="inner rounded-2xl bg-[var(--chip)] p-3 text-center text-sm">Seu compartilhamento está pausado. {partner?.name || "Seu amor"} não vê seu humor nem seu ciclo.</p>}
 
       {/* rostos do dia */}
-      <section className="card grid grid-cols-2 gap-2 p-4 text-center">
+      <section className="card grid grid-cols-2 gap-2 p-6 text-center">
         <Link href="/checkin" className="flex flex-col items-center gap-1" data-testid="my-face">
           {myMood ? <Face mood={myMood} size={84} /> : <EmptyFace size={84} />}
           <span className="font-bold">Você</span>
@@ -216,7 +217,7 @@ export default function Nos() {
       <Cats mood={catMoodFor(myMood, theirMood)} names={[pets[0]?.name, pets[1]?.name]} />
 
       {/* carinhos */}
-      <Section title="Mandar um carinho">
+      <Section title="Mandar um carinho" tone="peach">
         <div className="flex flex-wrap gap-2">
           {TOUCHES.map((t) => (
             <button key={t.id} className="chip tap-pop" onClick={() => touch(t.id)} data-testid={`touch-${t.id}`}>{t.label}</button>
@@ -227,10 +228,10 @@ export default function Nos() {
 
       {/* pedidos abertos */}
       {(toMe.length > 0 || fromMe.length > 0) && (
-        <Section title="Pedidos abertos" action={<Link href="/pedidos" className="text-sm underline">ver todos</Link>}>
+        <Section tone="sky" title="Pedidos abertos" action={<Link href="/pedidos" className="text-sm underline">ver todos</Link>}>
           <ul className="flex flex-col gap-2">
             {toMe.map((r) => (
-              <li key={r.id} className="flex items-center justify-between gap-2 rounded-2xl bg-[var(--chip)] p-3" data-testid="open-request">
+              <li key={r.id} className="flex items-center justify-between gap-2 inner rounded-2xl bg-[var(--chip)] p-3" data-testid="open-request">
                 <span><b>{requestLabel(r.type, partner?.role ?? "her", r.custom_text)}</b><br /><span className="text-xs text-[var(--muted)]">{r.type === "espaco" ? `hoje ${partner?.role === "her" ? "ela" : "ele"} pediu espaço` : `de ${partner?.name || "seu amor"}`}</span></span>
                 <button className="btn min-h-[44px] px-4" onClick={() => done(r)} data-testid="request-done"><IconCheck size={20} /> feito</button>
               </li>
@@ -254,16 +255,16 @@ export default function Nos() {
 
       {/* sugestões */}
       {partner && cards.length > 0 && (
-        <Section title={`Ideias pra ${partner.name || (partner.role === "her" ? "ela" : "ele")}`}>
+        <Section tone="mint" title={`Ideias pra ${partner.name || (partner.role === "her" ? "ela" : "ele")}`}>
           {partnerHard && <p className="mb-3 text-sm text-[var(--muted)]">{partner.role === "her" ? PARTNER_TIP.sad : PARTNER_TIP.him_low}</p>}
           {theirs?.self_esteem_low && <p className="mb-3 text-sm font-semibold">{PARTNER_TIP.self_esteem}</p>}
           <ul className="flex flex-col gap-3">
             {cards.map((c, k) => (
-              <li key={k} className="rounded-2xl bg-[var(--chip)] p-3" data-testid="suggestion">
+              <li key={k} className="inner rounded-2xl bg-[var(--chip)] p-3" data-testid="suggestion">
                 <p className="text-xs font-bold uppercase tracking-wide text-[var(--muted)]">{c.slot === "casa" ? "em casa" : c.slot === "gesto" ? "gesto pequeno" : "programa fora"}</p>
                 <p className="mt-0.5 font-bold">{c.title}</p>
                 {c.why && <p className="text-sm text-[var(--muted)]">porque {c.why}</p>}
-                <button className="mt-2 text-sm font-bold text-[var(--accent)]" onClick={() => didIt(c)}>fiz isso</button>
+                <button className="mt-2 text-sm font-bold text-[var(--accent-text)]" onClick={() => didIt(c)}>fiz isso</button>
               </li>
             ))}
           </ul>
@@ -271,7 +272,7 @@ export default function Nos() {
       )}
 
       {/* plano da semana */}
-      <Section title="Plano da semana" action={<Link href="/roles" className="text-sm underline">rolês</Link>}>
+      <Section tone="lavender" title="Plano da semana" action={<Link href="/roles" className="text-sm underline">rolês</Link>}>
         {plan.length ? <ul className="list-disc pl-5">{plan.map((p) => <li key={p.id}>{p.title}</li>)}</ul> : <p className="text-sm text-[var(--muted)]">Na quinta à noite chegam ideias de rolê pro fim de semana. O que os dois aprovarem aparece aqui.</p>}
       </Section>
 
@@ -279,8 +280,8 @@ export default function Nos() {
 
       {/* gatos */}
       {(petTasks.length > 0 || petAlerts.length > 0) && (
-        <Section title="Os gatos">
-          {petAlerts.map((a) => <p key={a} className="mb-2 rounded-2xl bg-[var(--blush)] p-3 text-sm font-semibold">{a}</p>)}
+        <Section title="Os gatos" tone="blush">
+          {petAlerts.map((a) => <p key={a} className="inner mb-2 rounded-2xl p-3 text-sm font-semibold">{a}</p>)}
           <div className="flex flex-wrap gap-2">
             {petTasks.map((t) => (
               <button key={t.id} className="chip" aria-pressed={!!doneToday(t)} onClick={() => petDone(t)}>

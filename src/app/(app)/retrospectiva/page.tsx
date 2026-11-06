@@ -42,7 +42,7 @@ export default function Retro() {
   return (
     <main className="flex flex-col gap-4">
       <Header title="Retrospectiva" back="/nos" />
-      <div className="flex flex-col gap-4 px-5">
+      <div className="flex flex-col gap-5 px-6">
         <div className="flex items-center justify-between">
           <button className="chip" onClick={() => shift(-1)} aria-label="Mês anterior">‹</button>
           <p className="text-lg font-bold capitalize">{label}</p>

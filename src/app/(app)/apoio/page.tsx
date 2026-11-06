@@ -85,7 +85,7 @@ export default function Apoio() {
 
   const tip = CARE_TIPS[state];
   return (
-    <main className="safe-top flex flex-col gap-4 px-5 pb-8">
+    <main className="safe-top flex flex-col gap-5 px-6 pb-8">
       <div className="float-in card p-5">
         <p className="text-xl font-bold leading-snug">{msg ?? "Obrigado por contar como você está."}</p>
         {context && <p className="mt-3 text-sm text-[var(--muted)]">{context}</p>}
