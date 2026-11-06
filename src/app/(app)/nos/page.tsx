@@ -205,7 +205,7 @@ export default function Nos() {
       </section>
 
       {incoming && (
-        <div className="pointer-events-none fixed inset-0 z-50 grid place-items-center" aria-live="assertive">
+        <div className="pointer-events-none fixed inset-0 z-50 grid place-items-center" aria-live="assertive" data-testid="incoming-touch">
           <div className="heart-burst rounded-[32px] bg-[var(--accent)] px-8 py-6 text-center text-[var(--accent-ink)] shadow-2xl">
             <svg width="56" height="56" viewBox="0 0 24 24" className="mx-auto" fill="currentColor" aria-hidden><path d="M12 21s-7.5-4.6-9.5-9.3C1 7.9 3.4 4.5 7 4.5c2 0 3.4 1 5 3 1.6-2 3-3 5-3 3.6 0 6 3.4 4.5 7.2C19.5 16.4 12 21 12 21z" /></svg>
             <p className="mt-2 text-xl font-extrabold">{touchLabel(incoming.kind)}</p>

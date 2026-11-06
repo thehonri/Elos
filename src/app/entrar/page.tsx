@@ -7,7 +7,7 @@ import { Cats } from "@/components/Cats";
 
 export default function Entrar() {
   const router = useRouter();
-  const { ready, session, me } = useApp();
+  const { ready, session, me, refresh } = useApp();
   const [mode, setMode] = useState<"login" | "create" | "forgot">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ export default function Entrar() {
   const [msg, setMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    if (ready && session) router.replace(me?.onboarded_at ? "/nos" : "/onboarding");
+    if (ready && session && me) router.replace(me.onboarded_at ? "/nos" : "/onboarding");
   }, [ready, session, me, router]);
 
   async function submit(e: React.FormEvent) {
@@ -39,6 +39,7 @@ export default function Entrar() {
         const r = await sb().rpc("create_couple", { p_name: name, p_role: role });
         if (r.error) throw new Error("Não deu para criar o casal.");
       }
+      await refresh();
       router.replace("/onboarding");
     } catch (err) {
       setMsg((err as Error).message);
